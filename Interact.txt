@@ -1,5 +1,23 @@
 
 
+
+peer chaincode invoke \
+  -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+  --tls --cafile $PWD/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  -C mychannel -n basic \
+  --peerAddresses localhost:7051 --tlsRootCertFiles $PWD/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
+  --peerAddresses localhost:9051 --tlsRootCertFiles $PWD/test-network/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
+  -c '{"function":"CreatePlant","Args":["{\"timestamp\":1727865600,\"gpsPosition\":\"45.4642,9.19\",\"basil\":{\"qr\":\"basil123\",\"extraInfo\":\"Greenhouse batch 5\",\"owner\":\"Org1MSP\"}}"]}'
+
+
+peer chaincode query -C mychannel -n basic -c '{"function":"GetTheStateOfPlant","Args":["basil123"]}'
+
+peer chaincode query -C mychannel -n basic -c '{"function":"HistoryPlant","Args":["basil123"]}'
+
+
+THIS was done without knowing the structure of Basil.java an BasilContract.java 
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
 export CORE_PEER_LOCALMSPID="Org1MSP"
 export CORE_PEER_TLS_ENABLED=true
 export CORE_PEER_TLS_ROOTCERT_FILE=$PWD/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
@@ -85,6 +103,7 @@ peer chaincode query -C mychannel -n basic -c '{"function":"HistoryPlant","Args"
 
 
 peer chaincode invoke ... -C mychannel -n basic -c '{"function":"myTransactionT","Args":["asset99"]}'
+
 
 
 
