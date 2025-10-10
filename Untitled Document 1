@@ -1,0 +1,330 @@
+install prerequisistes as java, jq , curl, git , docker-compose 
+
+Download of hyperladger > curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh 
+
+install all the ca binaries etc> ./install-fabric.sh --fabric-version 2.5.9 --ca-version 1.5.12 docker binsary samples
+
+root@VCC-target2:/home/vboxuser/Desktop/DS# curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh && chmod +x install-fabric.sh 
+root@VCC-target2:/home/vboxuser/Desktop/DS# ./install-fabric.sh --fabric-version 2.5.9 --ca-version 1.5.12 docker binsary samples
+
+Clone hyperledger/fabric-samples repo
+
+===> Cloning hyperledger/fabric-samples repo
+Cloning into 'fabric-samples'...
+remote: Enumerating objects: 15040, done.
+remote: Counting objects: 100% (382/382), done.
+remote: Compressing objects: 100% (247/247), done.
+remote: Total 15040 (delta 224), reused 137 (delta 134), pack-reused 14658 (from 4)
+Receiving objects: 100% (15040/15040), 23.85 MiB | 16.94 MiB/s, done.
+Resolving deltas: 100% (8280/8280), done.
+fabric-samples v2.5.9 does not exist, defaulting to main. fabric-samples main branch is intended to work with recent versions of fabric.
+
+Pull Hyperledger Fabric binaries
+
+===> Downloading version 2.5.9 platform specific fabric binaries
+===> Downloading:  https://github.com/hyperledger/fabric/releases/download/v2.5.9/hyperledger-fabric-linux-amd64-2.5.9.tar.gz
+===> Will unpack to: /home/vboxuser/Desktop/DS/fabric-samples
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  111M  100  111M    0     0  19.0M      0  0:00:05  0:00:05 --:--:-- 21.2M
+==> Done.
+===> Downloading version 1.5.12 platform specific fabric-ca-client binary
+===> Downloading:  https://github.com/hyperledger/fabric-ca/releases/download/v1.5.12/hyperledger-fabric-ca-linux-amd64-1.5.12.tar.gz
+===> Will unpack to: /home/vboxuser/Desktop/DS/fabric-samples
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 29.0M  100 29.0M    0     0  11.3M      0  0:00:02  0:00:02 --:--:-- 15.8M
+==> Done.
+
+Pull Hyperledger Fabric docker images
+
+FABRIC_IMAGES: peer orderer ccenv baseos
+===> Pulling fabric Images
+====>  docker.io/hyperledger/fabric-peer:2.5.9
+2.5.9: Pulling from hyperledger/fabric-peer
+9ea8908f4765: Pull complete 
+417853dadb58: Pull complete 
+38873af5354f: Pull complete 
+af7d67d29500: Pull complete 
+54f7ff8ec026: Pull complete 
+a645e9f395ef: Pull complete 
+Digest: sha256:4cd768f0e02358235521c3c024aef33afa9e81518ff6e448856a9db1bedae644
+Status: Downloaded newer image for hyperledger/fabric-peer:2.5.9
+docker.io/hyperledger/fabric-peer:2.5.9
+====>  docker.io/hyperledger/fabric-orderer:2.5.9
+2.5.9: Pulling from hyperledger/fabric-orderer
+9ea8908f4765: Already exists 
+05f6c8421493: Pull complete 
+42d381293dae: Pull complete 
+52490f94cbd2: Pull complete 
+921169b2dbe0: Pull complete 
+7b2f98c16937: Pull complete 
+Digest: sha256:de0c97002679a93347689fda4257b04fed0aa97d72648b1e3fcb2b9e5f452c35
+Status: Downloaded newer image for hyperledger/fabric-orderer:2.5.9
+docker.io/hyperledger/fabric-orderer:2.5.9
+====>  docker.io/hyperledger/fabric-ccenv:2.5.9
+2.5.9: Pulling from hyperledger/fabric-ccenv
+9ea8908f4765: Already exists 
+0b5b9ac9f038: Pull complete 
+543f3dfde2b7: Pull complete 
+7b3099a3be68: Pull complete 
+21049744d766: Pull complete 
+7ffe165343b9: Pull complete 
+0663902ee40d: Pull complete 
+Digest: sha256:6b6b83c9a88af351a1844999b9113b6c0792199be009e014bdf1231ebe0f6f85
+Status: Downloaded newer image for hyperledger/fabric-ccenv:2.5.9
+docker.io/hyperledger/fabric-ccenv:2.5.9
+====>  docker.io/hyperledger/fabric-baseos:2.5.9
+2.5.9: Pulling from hyperledger/fabric-baseos
+9ea8908f4765: Already exists 
+8bdafa9d491e: Pull complete 
+84f406c718ea: Pull complete 
+9e7f68fa5883: Pull complete 
+Digest: sha256:2e768b191d01518c8438708ad327d0a9c2d6a3c4bb6c4c04be637d63b56a33df
+Status: Downloaded newer image for hyperledger/fabric-baseos:2.5.9
+docker.io/hyperledger/fabric-baseos:2.5.9
+===> Pulling fabric ca Image
+====>  docker.io/hyperledger/fabric-ca:1.5.12
+1.5.12: Pulling from hyperledger/fabric-ca
+9ea8908f4765: Already exists 
+b9728be56e60: Pull complete 
+004da03816e0: Pull complete 
+905a98e2c10c: Pull complete 
+Digest: sha256:67f494052280fea15355a642557ebaf65e875eaa61cbf582a4e6cc9173ea6369
+Status: Downloaded newer image for hyperledger/fabric-ca:1.5.12
+docker.io/hyperledger/fabric-ca:1.5.12
+===> List out hyperledger images
+hyperledger/fabric-peer      2.5       e9702d423cd4   15 months ago   142MB
+hyperledger/fabric-peer      2.5.9     e9702d423cd4   15 months ago   142MB
+hyperledger/fabric-peer      latest    e9702d423cd4   15 months ago   142MB
+hyperledger/fabric-orderer   2.5       10fb520e9b0a   15 months ago   111MB
+hyperledger/fabric-orderer   2.5.9     10fb520e9b0a   15 months ago   111MB
+hyperledger/fabric-orderer   latest    10fb520e9b0a   15 months ago   111MB
+hyperledger/fabric-ccenv     2.5       09ef9881ad5f   15 months ago   638MB
+hyperledger/fabric-ccenv     2.5.9     09ef9881ad5f   15 months ago   638MB
+hyperledger/fabric-ccenv     latest    09ef9881ad5f   15 months ago   638MB
+hyperledger/fabric-baseos    2.5       b6e93e2f93f9   15 months ago   129MB
+hyperledger/fabric-baseos    2.5.9     b6e93e2f93f9   15 months ago   129MB
+hyperledger/fabric-baseos    latest    b6e93e2f93f9   15 months ago   129MB
+hyperledger/fabric-ca        1.5       e324dcb92c6e   15 months ago   209MB
+hyperledger/fabric-ca        1.5.12    e324dcb92c6e   15 months ago   209MB
+hyperledger/fabric-ca        latest    e324dcb92c6e   15 months ago   209MB
+
+
+Create the channel 
+
+Build the gradel file inside the twmplate chain and application template.
+
+Then i run the org3.sh bit there was missing the utils.sh
+
+
+
+i had to update the path export PATH=$PATH:/home/vboxuser/Desktop/DS/fabric-samples/bin
+export FABRIC_CFG_PATH=$PWD/../config/
+
+export FABRIC_CFG_PATH=/home/vboxuser/Desktop/DS/fabric-samples/config
+
+
+mkdir -p /home/vboxuser/Desktop/DS/Distribuited-System/config
+cp /home/vboxuser/Desktop/DS/fabric-samples/config/core.yaml /home/vboxuser/Desktop/DS/Distribuited-System/config/
+
+export FABRIC_CFG_PATH=/home/vboxuser/Desktop/DS/fabric-samples/config
+
+
+
+i had to change name tobasil instead if basic 
+
+cd ../chaincode-template/build/install
+mv basic basil
+
+i had to also copy perrorganization to script 
+
+cd /home/vboxuser/Desktop/DS/Distribuited-System/scripts/organizations/peerOrganizations
+ln -s /home/vboxuser/Desktop/DS/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com org1.example.com
+ln -s /home/vboxuser/Desktop/DS/fabric-samples/test-network/organizations/peerOrganizations/org2.example.com org2.example.com
+ln -s /home/vboxuser/Desktop/DS/fabric-samples/test-network/organizations/peerOrganizations/org3.example.com org3.example.com
+
+
+
+NOW i need to run the application, so i need to provide the folders in the test-network 
+cp -r /home/vboxuser/Desktop/DS/fabric-samples/test-network/organizations \
+      /home/vboxuser/Desktop/DS/Distribuited-System/application-template/
+
+some error cause i needed to update my path to export PATH_TO_TEST_NETWORK=/home/vboxuser/Desktop/DS/Distribuited-System/application-template
+
+
+
+AFTER A WHILEEEE?????????????????????????????
+
+i changed in APp.java the root path from ("..","..")  to only one ..
+
+then built the gradel and and run the gradelw run 
+
+Then i run the org3cpp but it missing
+
+🔍 Why you see this:
+
+./gradlew run just starts your chaincode class (ContractRouter) like a normal Java program.
+
+But Fabric expects chaincode to be started inside a peer process (or as an external service with proper env vars like CORE_CHAINCODE_ID_NAME).
+
+Since you didn’t set those, it crashes.
+
+✅ What you should do
+
+Don’t run ./gradlew run in chaincode-template directly.
+
+You already packaged and installed the chaincode with deployCCOrg3.sh.
+
+The peer will start the chaincode automatically once you:
+
+Approve it for Org1 and Org2
+
+Commit it on the channel
+
+(Optionally) invoke --isInit if your chaincode requires init
+
+Once committed, the peers launch it in Docker (Fabric v2.x default).
+
+⚡ Next Step for You
+
+You are stuck at “No metadata found for chaincode basic” when calling from the app. That means:
+
+The chaincode package is installed on peers ✅
+
+But it is not yet committed to the channel ❌
+
+👉 So the fix is to approve + commit the chaincode (using peer lifecycle chaincode approveformyorg and peer lifecycle chaincode commit), not to run it with gradlew.
+
+
+
+
+
+Perfect! That explains a lot. Since you already ran:
+
+```bash
+./network.sh up createchannel -ca -s couchdb
+```
+
+✅ Your **test-network** is up, channel `mychannel` is created, CouchDB is running.
+
+What’s missing now is **chaincode approval and commit**. Until you do that, the peers don’t recognize your chaincode → which causes:
+
+```
+no combination of peers can be derived which satisfy the endorsement policy: No metadata was found for chaincode basic in channel mychannel
+```
+
+---
+
+### Next Steps
+
+From the **test-network folder**, run:
+
+```bash
+# Deploy chaincode on channel 'mychannel'
+./network.sh deployCC -ccn basic -ccp ../chaincode-template -ccl java -c mychannel
+```
+
+This will:
+
+1. Package the chaincode (`basic.tar.gz`).
+2. Install it on peer0.org1 and peer0.org2 (you can skip org3 for now).
+3. Approve the chaincode definition for both Orgs.
+4. Commit it to the channel.
+5. Initialize it (if `--init-required` is set in the chaincode).
+
+---
+
+After this, your **application** or any `peer chaincode invoke/query` commands should work.
+
+⚠️ Important: Don’t run `./gradlew run` in `chaincode-template` anymore. Fabric peers handle running chaincode — your Gradle run is only for compiling/building it.
+
+---
+
+If you want, I can give you the **exact sequence of commands** to deploy `BasilContract` fully and then test it with your app so it will work. Do you want me to do that?
+
+
+
+
+
+
+So now from my test-network i need to run this # Deploy chaincode on channel 'mychannel'
+./network.sh deployCC -ccn basic -ccp ../chaincode-template -ccl java -c mychannel
+
+
+
+WAHT WAS MISSING WAS THE COMMIT TO THE CHANNEL OF THE ORGANIZATION AND THE APPROVAL , SO NOW I DID THAT >
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# export CORE_PEER_LOCALMSPID="Org1MSP"
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_TLS_ROOTCERT_FILE=$PWD/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=$PWD/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode approveformyorg \
+  -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+  --tls --cafile $PWD/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  --channelID mychannel --name basic \
+  --version 1.0 --package-id basic_1.0:<PACKAGE_ID> --sequence 1 --init-required
+bash: PACKAGE_ID: No such file or directory
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode approveformyorg \
+  -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+  --tls --cafile $PWD/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  --channelID mychannel --name basic \
+  --version 1.0 --package-id basic_1.0:<PACKAGE_ID> --sequence 1 --init-required
+bash: PACKAGE_ID: No such file or directory
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode queryinstalled
+Installed chaincodes on peer:
+Package ID: basil_1.0:7a05c5b136ea2779530dc1467b632a00933b46d98d7d42cd3d7c6265d4a45bc6, Label: basil_1.0
+Package ID: basic_1.0:95e08b8ab61476cd913443dbf3304aee1954698fe82d9ec9a83c4250f85d095a, Label: basic_1.0
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# export CORE_PEER_LOCALMSPID="Org1MSP"
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_TLS_ROOTCERT_FILE=$PWD/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=$PWD/test-network/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export CORE_PEER_ADDRESS=localhost:7051
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode approveformyorg \
+  -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+  --tls --cafile $PWD/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  --channelID mychannel --name basic \
+  --version 1.0 --package-id basic_1.0:95e08b8ab61476cd913443dbf3304aee1954698fe82d9ec9a83c4250f85d095a \
+  --sequence 1 --init-required
+2025-10-01 02:55:30.463 CEST 0001 INFO [chaincodeCmd] ClientWait -> txid [936d726cab1af1100bed02c142795ccea8ba1b81d14988ade23d63282b1d757a] committed with status (VALID) at localhost:7051
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# export CORE_PEER_LOCALMSPID="Org2MSP"
+export CORE_PEER_TLS_ENABLED=true
+export CORE_PEER_TLS_ROOTCERT_FILE=$PWD/test-network/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=$PWD/test-network/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
+export CORE_PEER_ADDRESS=localhost:9051
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode approveformyorg \
+  -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+  --tls --cafile $PWD/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  --channelID mychannel --name basic \
+  --version 1.0 --package-id basic_1.0:95e08b8ab61476cd913443dbf3304aee1954698fe82d9ec9a83c4250f85d095a \
+  --sequence 1 --init-required
+2025-10-01 02:55:56.002 CEST 0001 INFO [chaincodeCmd] ClientWait -> txid [d8ec5eec1810c077bc4c0fbabaf9dd48204a2e74c4de7d769cc883e62c7480ad] committed with status (VALID) at localhost:9051
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode commit \
+  -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com \
+  --tls --cafile $PWD/test-network/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+  --channelID mychannel --name basic \
+  --peerAddresses localhost:7051 --tlsRootCertFiles $PWD/test-network/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
+  --peerAddresses localhost:9051 --tlsRootCertFiles $PWD/test-network/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
+  --version 1.0 --sequence 1 --init-required
+2025-10-01 02:58:44.826 CEST 0001 INFO [chaincodeCmd] ClientWait -> txid [18a43f18e92a2d4ba66c173d36d25a006b4e44ff53e08f327104b88d811b67c8] committed with status (VALID) at localhost:7051
+2025-10-01 02:58:45.327 CEST 0002 INFO [chaincodeCmd] ClientWait -> txid [18a43f18e92a2d4ba66c173d36d25a006b4e44ff53e08f327104b88d811b67c8] committed with status (VALID) at localhost:9051
+root@VCC-target2:/home/vboxuser/Desktop/DS/Distribuited-System# peer lifecycle chaincode querycommitted -C mychannel -n basic
+Committed chaincode definition for chaincode 'basic' on channel 'mychannel':
+Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [Org1MSP: true, Org2MSP: true, Org3MSP: false]
+
+After i verified the comittmend with >  peer  lifecycle chaincode querycommitted -C -n basic
+
+
+i need to initialize >
+unfortunatly i do not have in my code basilcontract the initialization so i recommit without forcing init  on sequence 2
+
+After that i saw the structure of Basil and BasilContract and queried correctly the invoke following the json contract structure 
+
+
+it worked out 
+
+
+
+
